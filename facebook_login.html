@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - Log In or Sign Up</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lang-select {
+            margin-bottom: 40px;
+        }
+
+        .lang-select select {
+            background: none;
+            border: none;
+            font-size: 14px;
+            color: #4b4f56;
+            font-weight: bold;
+        }
+
+        .logo {
+            font-size: 42px;
+            font-weight: bold;
+            color: #1877f2;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        .input-field::placeholder {
+            color: #90949c;
+        }
+
+        .input-field:focus {
+            border-color: #1877f2;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #1877f2;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+
+        .login-btn:active {
+            background-color: #166fe5;
+        }
+
+        .forgot-password {
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #1c1e21;
+            text-decoration: none;
+        }
+
+        .create-btn {
+            width: 100%;
+            max-width: 400px;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #1877f2;
+            background-color: #f5f6f7;
+            border: 1px solid #ccd0d5;
+            border-radius: 20px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 40px;
+        }
+
+        .watermark {
+            font-size: 12px;
+            background-color: #ffff00;
+            padding: 2px 6px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Language Selector -->
+        <div class="lang-select">
+            <select>
+                <option value="en">English (US)</option>
+            </select>
+        </div>
+
+        <!-- Facebook Logo -->
+        <div class="logo">facebook</div>
+
+        <!-- Login Form -->
+        <form>
+            <input type="text" class="input-field" placeholder="Mobile number or email"[cite: 1]>
+            <input type="password" class="input-field" placeholder="Password"[cite: 1]>
+            <button type="submit" class="login-btn">Log in</button>
+        </form>
+
+        <!-- Forgot Password -->
+        <a href="#" class="forgot-password">Forgot password?</a>
+    </div>
+
+    <!-- Create Account Button -->
+    <a href="#" class="create-btn">Create new account</a>
+
+    <!-- Watermark from image footer -->
+    <div class="watermark">Coding Rukon</div>
+
+</body>
+</html>

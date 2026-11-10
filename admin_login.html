@@ -1,0 +1,68 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f3ed">
+    <title>Admin sign in | Lock Room</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+    <style>
+        .login-card { max-width: 440px; }
+        .login-card h2 { font-family: Georgia, serif; }
+        .subtitle { line-height: 1.6; }
+        .input-box input { padding-left: 18px; }
+        .sign-in-btn { background: #2f7259; color: #fff; }
+        .sign-in-btn:hover { background: #235a46; color: #fff; }
+        .status { min-height: 24px; margin-top: 16px; color: #235a46; font-size: .85rem; }
+        .back-link { display: inline-block; margin-top: 20px; color: #235a46; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+        @media (max-width: 480px) { .login-card { width: calc(100vw - 32px); } }
+    </style>
+</head>
+<body>
+    <main class="login-container">
+        <section class="login-card" aria-labelledby="login-title">
+            <h2 id="login-title">Admin sign in</h2>
+            <p class="subtitle">Only the authorised Lock Room administrator can manage directory icons. We’ll send a secure sign-in link to your email.</p>
+            <form id="login-form">
+                <div class="input-box">
+                    <input id="email" type="email" placeholder="Email address" aria-label="Email address" autocomplete="email" required>
+                </div>
+                <button type="submit" class="sign-in-btn">SEND SIGN-IN LINK</button>
+            </form>
+            <p id="status" class="status" role="status" aria-live="polite"></p>
+            <a class="back-link" href="index.html">Back to Lock Room</a>
+        </section>
+    </main>
+    <script>
+        (() => {
+            const SUPABASE_URL = "https://scezwjlsagkzmbdaroof.supabase.co";
+            const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_1WdJH63Uqn_8xcv6SG7rNg_EfwPELjv";
+            const ADMIN_EMAIL = "salahudheen2006@gmail.com";
+            const form = document.querySelector("#login-form");
+            const status = document.querySelector("#status");
+            if (!window.supabase) {
+                status.textContent = "Authentication could not load. Please return to the directory and try again.";
+                form.querySelector("button").disabled = true;
+                return;
+            }
+            const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+            form.addEventListener("submit", async event => {
+                event.preventDefault();
+                const email = document.querySelector("#email").value.trim().toLowerCase();
+                if (email !== ADMIN_EMAIL) {
+                    status.textContent = "Only the configured Lock Room administrator can sign in here.";
+                    return;
+                }
+                status.textContent = "Sending secure sign-in link…";
+                const { error } = await client.auth.signInWithOtp({
+                    email,
+                    options: { emailRedirectTo: location.origin + "/index.html", shouldCreateUser: true }
+                });
+                status.textContent = error ? error.message : "Check your email for the secure sign-in link.";
+            });
+        })();
+    </script>
+</body>
+</html>
