@@ -1,75 +1,41 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f4f3ed"><meta name="description" content="Lock Room community app directory">
-<title>Lock Room</title>
-<style>
-:root{font-family:Inter,system-ui,sans-serif;color:#202c29;background:#f4f3ed}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(#d5d9cd .7px,transparent .7px) 0 0/15px 15px}header,main,footer{width:min(1080px,calc(100% - 36px));margin:auto}header{display:flex;justify-content:space-between;align-items:center;padding:24px 0}.brand{font-weight:800;font-size:20px}.mark{display:inline-grid;place-items:center;background:#2f7259;color:white;width:34px;height:34px;border-radius:10px;margin-right:8px}.pill{font-size:12px;color:#53615a;border:1px solid #d5d9cf;padding:7px 10px;border-radius:20px}main{padding:38px 0 60px}.hero{display:grid;grid-template-columns:1fr 380px;gap:45px;align-items:center}.eyebrow{color:#235a46;font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:12px}h1{font:400 clamp(42px,6vw,64px)/1.05 Georgia,serif;margin:12px 0}.muted{color:#64716b;line-height:1.6}.panel{background:#fffefa;border:1px solid #e2e4dc;border-radius:12px;padding:26px;box-shadow:0 15px 45px #30413512}.panel h2{font:400 28px Georgia;margin:0 0 8px}input,button{font:inherit}input{width:100%;padding:13px;border:1px solid #ccd4cb;border-radius:7px;margin:8px 0 12px}button,.button{border:0;background:#2f7259;color:white;padding:12px 16px;border-radius:7px;cursor:pointer;font-weight:700;text-decoration:none;display:inline-block}button:hover,.button:hover{background:#235a46}.secondary{background:#e9eee8;color:#235a46}.status{font-size:13px;min-height:22px;color:#235a46}.hidden{display:none!important}.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}.app{background:white;border:1px solid #e2e4dc;border-radius:10px;padding:18px;text-align:center}.app img{width:52px;height:52px;object-fit:cover;border-radius:13px;display:block;margin:0 auto 10px}.app a{color:#202c29;text-decoration:none;font-weight:700}.app .review-link{display:block;color:#53615a;margin-top:8px}.app .review-link:hover{color:#235a46;text-decoration:underline}.app small{display:block;color:#64716b;margin-top:5px}.admin{margin-top:26px}.admin-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.admin-row input{max-width:280px}.safety-card{margin-top:22px;border:1px solid #d7dfd5;background:#fffefa;border-radius:12px;padding:24px}.safety-brand{display:flex;align-items:center;gap:12px;font-weight:800}.safety-mark{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;color:white;font-size:20px}.safety-list{padding-left:20px;color:#53615a;line-height:1.8}.safety-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.safety-note{font-size:12px;color:#79837d;line-height:1.5}footer{padding:22px 0;color:#79837d;font-size:12px;border-top:1px solid #e2e4dc}@media(max-width:760px){.hero{grid-template-columns:1fr;gap:25px}.apps{grid-template-columns:repeat(2,1fr)}main{padding-top:15px}}
-.auth-panel{background:#e8eee8;border:1px solid #d6e0d7;border-radius:28px;box-shadow:12px 12px 28px #cbd5cb,-12px -12px 28px #fffefa}
-.auth-panel h2{margin-bottom:12px}
-.auth-panel .muted{margin-bottom:20px}
-.auth-panel label{display:block;color:#53615a;font-size:.9rem;font-weight:500}
-.auth-panel .auth-input{margin:8px 0 16px;padding:14px 18px;border:0;border-radius:24px;background:#e8eee8;box-shadow:inset 5px 5px 9px #cbd5cb,inset -5px -5px 9px #fffefa;transition:box-shadow .2s ease}
-.auth-panel .auth-input:focus{outline:2px solid #2f7259;outline-offset:3px;box-shadow:inset 3px 3px 6px #cbd5cb,inset -3px -3px 6px #fffefa}
-.auth-panel .auth-submit{border-radius:22px;box-shadow:5px 5px 10px #c3d0c4,-5px -5px 10px #fffefa;transition:box-shadow .2s ease,transform .2s ease}
-.auth-panel .auth-submit:hover{background:#235a46;box-shadow:3px 3px 7px #c3d0c4,-3px -3px 7px #fffefa;transform:translateY(-1px)}
-.auth-panel .auth-submit:active{box-shadow:inset 3px 3px 6px #1d4c3a,inset -3px -3px 6px #347c60;transform:none}
-@media(max-width:760px){.auth-panel{border-radius:22px;box-shadow:7px 7px 18px #cbd5cb,-7px -7px 18px #fffefa}}
-</style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f3ed">
+  <meta name="description" content="A clear, safety-first directory for the social platforms you use.">
+  <title>Lock Room · A safer way to find your social spaces</title>
+  <style>
+    :root{font-family:Inter,system-ui,sans-serif;color:#202c29;background:#f4f3ed}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(#d5d9cd .7px,transparent .7px) 0 0/15px 15px}header,main,footer{width:min(1080px,calc(100% - 36px));margin:auto}header{display:flex;justify-content:space-between;align-items:center;padding:24px 0}.brand{font-weight:800;font-size:20px}.mark{display:inline-grid;place-items:center;background:#2f7259;color:#fff;width:36px;height:36px;border-radius:11px;margin-right:9px;vertical-align:middle}.nav-link{color:#53615a;text-decoration:none;border:1px solid #d5d9cf;padding:8px 12px;border-radius:20px;font-size:13px}.hero{padding:clamp(38px,8vw,92px) 0 48px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}.eyebrow{color:#235a46;font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:12px}.hero h1{font:400 clamp(44px,7vw,76px)/1.02 Georgia,serif;margin:14px 0 20px;max-width:680px}.lead{color:#64716b;line-height:1.75;font-size:18px;max-width:630px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.button{display:inline-block;padding:13px 18px;border-radius:8px;background:#2f7259;color:white;text-decoration:none;font-weight:700}.button:hover{background:#235a46}.secondary{background:#e9eee8;color:#235a46}.trust-card,.steps{background:#fffefa;border:1px solid #e2e4dc;border-radius:16px;padding:26px;box-shadow:0 15px 45px #30413512}.trust-card h2,.steps h2{font:400 28px Georgia;margin:0 0 10px}.trust-card p,.steps p{color:#64716b;line-height:1.7;margin:0}.trust-list{list-style:none;padding:0;margin:20px 0 0}.trust-list li{padding:12px 0;border-top:1px solid #e7e9e1;color:#53615a;line-height:1.55}.trust-list strong{color:#235a46}.steps{margin-bottom:56px}.step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}.step{padding:18px;border:1px solid #e2e4dc;border-radius:11px}.step-number{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e9eee8;color:#235a46;font-weight:800;margin-bottom:12px}.step h3{margin:0 0 6px;font-size:16px}.step p{font-size:14px}footer{padding:22px 0;color:#79837d;font-size:12px;border-top:1px solid #e2e4dc;line-height:1.7}@media(max-width:760px){.hero{grid-template-columns:1fr;gap:28px;padding-top:42px}.step-grid{grid-template-columns:1fr}main{padding-bottom:25px}}
+  </style>
 </head>
 <body>
-<header><div class="brand"><span class="mark">L</span>Lock Room</div><span class="pill">Community directory</span></header>
-<main>
-<section class="hero">
-<div><p class="eyebrow">A little more connected</p><h1>Good things happen together.</h1><p class="muted">A simple directory for the social spaces you use. Open an app's official website from one place.</p></div>
-<section class="panel auth-panel" aria-labelledby="auth-title"><h2 id="auth-title">Admin sign in</h2><p class="muted">Only the authorised administrator can manage directory icons. Sign in using a secure email link.</p>
-<form id="login-form"><label for="email">Email address</label><input class="auth-input" id="email" type="email" autocomplete="email" placeholder="you@example.com" required><button class="auth-submit" type="submit">Send sign-in link</button></form>
-<div id="signed-in" class="hidden"><p id="user-label" class="muted"></p><button id="signout" class="secondary" type="button">Sign out</button></div><p id="auth-status" class="status" role="status" aria-live="polite"></p>
-</section></section>
-<section class="panel" style="margin-top:32px"><h2>Social directory</h2><p class="muted">Choose a platform to review safety tips before opening its official website. Lock Room never asks for social media passwords.</p><div class="apps" id="apps"></div></section>
-<section id="safety-panel" class="safety-card hidden" aria-live="polite">
-<div class="safety-brand"><span id="safety-mark" class="safety-mark">IG</span><span><span class="eyebrow">LOCK ROOM SAFETY GUIDE</span><br><span id="safety-title">Instagram safety guide</span></span></div>
-<p id="safety-intro" class="muted"></p>
-<ul class="safety-list"><li>Use a strong, unique password on the official platform.</li><li>Enable two-factor authentication in the platform's own security settings.</li><li>Never share login codes or passwords, and avoid suspicious links.</li><li>Review active sessions and sign out of devices you do not recognise.</li></ul>
-<label><input id="safety-confirm" type="checkbox" style="width:auto;margin-right:8px"> I have read these safety tips.</label>
-<div id="safety-success" class="hidden"><h2 style="color:#235a46">Congratulations! 🎉</h2><p class="muted">You have completed the Lock Room safety guidance. Follow these steps on the official platform to help keep your account safe.</p></div>
-<div class="safety-actions"><button id="safety-complete" type="button">Complete safety guide</button><a id="official-link" class="button hidden" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Continue to official website ↗</a><button id="safety-back" class="secondary" type="button">Back to directory</button></div>
-<p class="safety-note">Lock Room is independent and is not affiliated with these platforms. This is safety guidance, not an account scan or security verification.</p>
-</section>
-<section id="admin-panel" class="panel admin hidden"><h2>Admin dashboard</h2><p class="muted">Upload a replacement icon. Images are stored in Supabase Storage and shared with visitors.</p><div class="admin-row" id="upload-controls"></div><p id="admin-status" class="status" role="status"></p></section>
-</main><footer>Lock Room · Secure admin access · No social account passwords collected</footer>
-<script>
-(() => {
- const SUPABASE_URL="https://scezwjlsagkzmbdaroof.supabase.co";
- const SUPABASE_PUBLISHABLE_KEY="sb_publishable_1WdJH63Uqn_8xcv6SG7rNg_EfwPELjv";
- const ADMIN_EMAIL="salahudheen2006@gmail.com";
- const BUCKET="app-icons";
- const apps=[
-  {id:"instagram",name:"Instagram",url:"https://www.instagram.com/",color:"#c13584",mark:"IG"},
-  {id:"facebook",name:"Facebook",url:"https://www.facebook.com/",color:"#4267b2",mark:"f"},
-  {id:"x",name:"X",url:"https://x.com/",color:"#202c29",mark:"X"},
-  {id:"whatsapp",name:"WhatsApp",url:"https://www.whatsapp.com/",color:"#25a56a",mark:"WA"}
- ];
- const $=s=>document.querySelector(s), status=$("#auth-status");
- if(!window.supabase){status.textContent="Authentication library failed to load. Refresh the page.";return}
- const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
- function renderApps(urls={}){$("#apps").innerHTML=apps.map(a=>'<article class="app"><img src="'+(urls[a.id]||"data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect width="64" height="64" rx="14" fill="'+a.color+'"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="23" font-family="Arial">'+a.mark+'</text></svg>'))+'" alt="'+a.name+' icon"><strong>'+a.name+'</strong><a class="review-link" href="'+({instagram:"insta_login.html",facebook:"facebook_login.html",x:"x_login.html",whatsapp:"whatsapp_login.html"}[a.id])+'">Review safety tips →</a></article>').join("")}
- async function loadIcons(){const {data,error}=await client.storage.from(BUCKET).list();if(error){renderApps();return}const entries=(data||[]).map(file=>{const id=file.name.replace(/\.(png|jpg|webp)$/i,"");const {data:pub}=client.storage.from(BUCKET).getPublicUrl(file.name);return [id,pub.publicUrl]});renderApps(Object.fromEntries(entries))}
-
- let selectedApp=null;
-
- $("#safety-complete").addEventListener("click",()=>{if(!$("#safety-confirm").checked){$("#safety-intro").textContent="Please confirm that you have read the safety tips.";return}$("#safety-success").classList.remove("hidden");$("#official-link").classList.remove("hidden");$("#safety-complete").classList.add("hidden")});
- $("#safety-back").addEventListener("click",()=>{$("#safety-panel").classList.add("hidden");$("#apps").scrollIntoView({behavior:"smooth",block:"start"})});
- function setAdmin(user){const isAdmin=!!user&&user.email?.toLowerCase()===ADMIN_EMAIL;$("#login-form").classList.toggle("hidden",!!user);$("#signed-in").classList.toggle("hidden",!user);$("#admin-panel").classList.toggle("hidden",!isAdmin);$("#user-label").textContent=user?"Signed in as "+user.email:"";if(user&&!isAdmin)status.textContent="Signed in, but this account is not authorised for admin access."}
- $("#login-form").addEventListener("submit",async e=>{e.preventDefault();status.textContent="Sending secure sign-in link…";const email=$("#email").value.trim().toLowerCase();const {error}=await client.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+"/index.html",shouldCreateUser:true}});status.textContent=error?error.message:"Check your email for the sign-in link. Only the configured admin email can access admin tools."});
- $("#signout").addEventListener("click",async()=>{const {error}=await client.auth.signOut();status.textContent=error?error.message:"Signed out.";});
- $("#upload-controls").innerHTML=apps.map(a=>'<label>'+a.name+' <input type="file" accept="image/png,image/jpeg,image/webp" data-upload="'+a.id+'"></label>').join("");
- $("#upload-controls").addEventListener("change",async e=>{const input=e.target.closest("[data-upload]");if(!input||!input.files[0])return;const file=input.files[0],id=input.dataset.upload;if(!["image/png","image/jpeg","image/webp"].includes(file.type)||file.size>1024*1024){$("#admin-status").textContent="Choose a PNG, JPEG or WebP image smaller than 1 MB.";input.value="";return}$("#admin-status").textContent="Uploading…";const ext=file.type==="image/png"?"png":file.type==="image/webp"?"webp":"jpg";const {error}=await client.storage.from(BUCKET).upload(id+"."+ext,file,{upsert:true,contentType:file.type,cacheControl:"3600"});$("#admin-status").textContent=error?error.message:"Upload complete. Refreshing directory…";if(!error){const {data}=await client.storage.from(BUCKET).list();const match=data?.find(x=>x.name.replace(/\.(png|jpg|webp)$/i,"")===id);if(match){const {data:pub}=client.storage.from(BUCKET).getPublicUrl(match.name);const img=$("#apps").querySelector('[data-safety="'+id+'"] img');if(img)img.src=pub.publicUrl+"?v="+Date.now()}}input.value=""});
- client.auth.onAuthStateChange((_event,session)=>setAdmin(session?.user||null));
- client.auth.getSession().then(({data,error})=>{if(error)status.textContent=error.message;setAdmin(data.session?.user||null)});
- loadIcons();
-})();
-</script>
-</body></html>
+  <header><div class="brand"><span class="mark">L</span>Lock Room</div><a class="nav-link" href="directory.html">Community directory</a></header>
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">A little more connected</p>
+        <h1>Find your social spaces, with confidence.</h1>
+        <p class="lead">Lock Room is a simple directory that helps you reach the social platforms you use. Review practical safety reminders, then continue to each platform’s official website.</p>
+        <div class="actions"><a class="button" href="directory.html">Explore the directory</a><a class="button secondary" href="#how-it-works">How it works</a></div>
+      </div>
+      <aside class="trust-card" aria-labelledby="trust-title">
+        <p class="eyebrow">Your trust matters</p>
+        <h2 id="trust-title">Clear, careful, and direct.</h2>
+        <p>Lock Room is an independent directory. It does not sign in to social accounts or ask for their passwords.</p>
+        <ul class="trust-list"><li><strong>Official destinations.</strong> Links take you to the platforms’ own websites.</li><li><strong>No social passwords.</strong> Never enter a platform password on Lock Room.</li><li><strong>Safety first.</strong> Read a short checklist before you continue.</li></ul>
+      </aside>
+    </section>
+    <section id="how-it-works" class="steps" aria-labelledby="steps-title">
+      <p class="eyebrow">A simple process</p><h2 id="steps-title">How Lock Room works</h2>
+      <div class="step-grid">
+        <article class="step"><span class="step-number">1</span><h3>Choose a platform</h3><p>Browse the community directory and select a service.</p></article>
+        <article class="step"><span class="step-number">2</span><h3>Review safety tips</h3><p>Check a few reminders for protecting your account.</p></article>
+        <article class="step"><span class="step-number">3</span><h3>Continue officially</h3><p>Open the platform’s official website when you’re ready.</p></article>
+      </div>
+    </section>
+  </main>
+  <footer>Lock Room is independent and is not affiliated with the platforms listed. For your security, enter account details only on their official websites or apps.</footer>
+</body>
+</html>

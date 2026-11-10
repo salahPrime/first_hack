@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -32,7 +32,7 @@
                 <button type="submit" class="sign-in-btn">SEND SIGN-IN LINK</button>
             </form>
             <p id="status" class="status" role="status" aria-live="polite"></p>
-            <a class="back-link" href="index.html">Back to Lock Room</a>
+            <a class="back-link" href="directory.html">Back to Lock Room</a>
         </section>
     </main>
     <script>
@@ -58,7 +58,7 @@
                 status.textContent = "Sending secure sign-in link…";
                 const { error } = await client.auth.signInWithOtp({
                     email,
-                    options: { emailRedirectTo: location.origin + "/index.html", shouldCreateUser: true }
+                    options: { emailRedirectTo: location.origin + "/directory.html", shouldCreateUser: true }
                 });
                 status.textContent = error ? error.message : "Check your email for the secure sign-in link.";
             });
