@@ -12,6 +12,7 @@
         .login-card h2 { font-family: Georgia, serif; }
         .subtitle { line-height: 1.6; }
         .input-box input { padding-left: 18px; }
+        .sign-in-btn:disabled { opacity: .62; cursor: not-allowed; }
         .sign-in-btn { background: #2f7259; color: #fff; }
         .sign-in-btn:hover { background: #235a46; color: #fff; }
         .status { min-height: 24px; margin-top: 16px; color: #235a46; font-size: .85rem; }
@@ -50,17 +51,37 @@
             const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
             form.addEventListener("submit", async event => {
                 event.preventDefault();
+                const button = form.querySelector("button[type=submit]");
+                if (button.disabled) return;
                 const email = document.querySelector("#email").value.trim().toLowerCase();
                 if (email !== ADMIN_EMAIL) {
                     status.textContent = "Only the configured Lock Room administrator can sign in here.";
                     return;
                 }
+                button.disabled = true;
+                button.textContent = "SENDING…";
                 status.textContent = "Sending secure sign-in link…";
-                const { error } = await client.auth.signInWithOtp({
-                    email,
-                    options: { emailRedirectTo: location.origin + "/directory.html", shouldCreateUser: true }
-                });
-                status.textContent = error ? error.message : "Check your email for the secure sign-in link.";
+                try {
+                    const { error } = await client.auth.signInWithOtp({
+                        email,
+                        options: { emailRedirectTo: location.origin + "/directory.html", shouldCreateUser: true }
+                    });
+                    if (error) {
+                        const limited = /rate.?limit|too many|429/i.test((error.code || "") + " " + error.message);
+                        status.textContent = limited
+                            ? "Supabase has temporarily limited sign-in emails. Wait before trying again; configure custom SMTP in Supabase for reliable delivery."
+                            : error.message;
+                    } else {
+                        status.textContent = "Check your email for the secure sign-in link. Wait 60 seconds before requesting another.";
+                    }
+                } catch (error) {
+                    status.textContent = error.message || "Could not send the sign-in link. Please try again later.";
+                }
+                button.textContent = "WAIT BEFORE RETRYING";
+                window.setTimeout(() => {
+                    button.disabled = false;
+                    button.textContent = "SEND SIGN-IN LINK";
+                }, 60000);
             });
         })();
     </script>

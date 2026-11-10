@@ -12,7 +12,7 @@
 .auth-panel label{display:block;color:#53615a;font-size:.9rem;font-weight:500}
 .auth-panel .auth-input{margin:8px 0 16px;padding:14px 18px;border:0;border-radius:24px;background:#e8eee8;box-shadow:inset 5px 5px 9px #cbd5cb,inset -5px -5px 9px #fffefa;transition:box-shadow .2s ease}
 .auth-panel .auth-input:focus{outline:2px solid #2f7259;outline-offset:3px;box-shadow:inset 3px 3px 6px #cbd5cb,inset -3px -3px 6px #fffefa}
-.auth-panel .auth-submit{border-radius:22px;box-shadow:5px 5px 10px #c3d0c4,-5px -5px 10px #fffefa;transition:box-shadow .2s ease,transform .2s ease}
+.auth-panel .auth-submit:disabled{opacity:.62;cursor:not-allowed}.auth-panel .auth-submit{border-radius:22px;box-shadow:5px 5px 10px #c3d0c4,-5px -5px 10px #fffefa;transition:box-shadow .2s ease,transform .2s ease}
 .auth-panel .auth-submit:hover{background:#235a46;box-shadow:3px 3px 7px #c3d0c4,-3px -3px 7px #fffefa;transform:translateY(-1px)}
 .auth-panel .auth-submit:active{box-shadow:inset 3px 3px 6px #1d4c3a,inset -3px -3px 6px #347c60;transform:none}
 @media(max-width:760px){.auth-panel{border-radius:22px;box-shadow:7px 7px 18px #cbd5cb,-7px -7px 18px #fffefa}}
@@ -63,7 +63,24 @@
  $("#safety-complete").addEventListener("click",()=>{if(!$("#safety-confirm").checked){$("#safety-intro").textContent="Please confirm that you have read the safety tips.";return}$("#safety-success").classList.remove("hidden");$("#official-link").classList.remove("hidden");$("#safety-complete").classList.add("hidden")});
  $("#safety-back").addEventListener("click",()=>{$("#safety-panel").classList.add("hidden");$("#apps").scrollIntoView({behavior:"smooth",block:"start"})});
  function setAdmin(user){const isAdmin=!!user&&user.email?.toLowerCase()===ADMIN_EMAIL;$("#login-form").classList.toggle("hidden",!!user);$("#signed-in").classList.toggle("hidden",!user);$("#admin-panel").classList.toggle("hidden",!isAdmin);$("#user-label").textContent=user?"Signed in as "+user.email:"";if(user&&!isAdmin)status.textContent="Signed in, but this account is not authorised for admin access."}
- $("#login-form").addEventListener("submit",async e=>{e.preventDefault();status.textContent="Sending secure sign-in link…";const email=$("#email").value.trim().toLowerCase();const {error}=await client.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+"/directory.html",shouldCreateUser:true}});status.textContent=error?error.message:"Check your email for the sign-in link. Only the configured admin email can access admin tools."});
+ $("#login-form").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const button=e.currentTarget.querySelector("button[type=submit]"), email=$("#email").value.trim().toLowerCase();
+  if(button.disabled)return;
+  if(email!==ADMIN_EMAIL){status.textContent="Only the configured administrator can request a sign-in link.";return}
+  button.disabled=true;
+  button.textContent="Sending…";
+  status.textContent="Sending secure sign-in link…";
+  try{
+   const {error}=await client.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+"/directory.html",shouldCreateUser:true}});
+   if(error){
+    const limited=/rate.?limit|too many|429/i.test((error.code||"")+" "+error.message);
+    status.textContent=limited?"Supabase has temporarily limited sign-in emails. Wait before trying again; configure custom SMTP in Supabase for reliable delivery.":error.message;
+   }else status.textContent="Check your email for the secure sign-in link. Wait 60 seconds before requesting another.";
+  }catch(error){status.textContent=error.message||"Could not send the sign-in link. Please try again later."}
+  button.textContent="Wait before retrying";
+  window.setTimeout(()=>{button.disabled=false;button.textContent="Send sign-in link"},60000);
+ });
  $("#signout").addEventListener("click",async()=>{const {error}=await client.auth.signOut();status.textContent=error?error.message:"Signed out.";});
  $("#upload-controls").innerHTML=apps.map(a=>'<label>'+a.name+' <input type="file" accept="image/png,image/jpeg,image/webp" data-upload="'+a.id+'"></label>').join("");
  $("#upload-controls").addEventListener("change",async e=>{const input=e.target.closest("[data-upload]");if(!input||!input.files[0])return;const file=input.files[0],id=input.dataset.upload;if(!["image/png","image/jpeg","image/webp"].includes(file.type)||file.size>1024*1024){$("#admin-status").textContent="Choose a PNG, JPEG or WebP image smaller than 1 MB.";input.value="";return}$("#admin-status").textContent="Uploading…";const ext=file.type==="image/png"?"png":file.type==="image/webp"?"webp":"jpg";const {error}=await client.storage.from(BUCKET).upload(id+"."+ext,file,{upsert:true,contentType:file.type,cacheControl:"3600"});$("#admin-status").textContent=error?error.message:"Upload complete. Refreshing directory…";if(!error){const {data}=await client.storage.from(BUCKET).list();const match=data?.find(x=>x.name.replace(/\.(png|jpg|webp)$/i,"")===id);if(match){const {data:pub}=client.storage.from(BUCKET).getPublicUrl(match.name);const img=$("#apps").querySelector('[data-safety="'+id+'"] img');if(img)img.src=pub.publicUrl+"?v="+Date.now()}}input.value=""});
