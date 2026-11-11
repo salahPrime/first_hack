@@ -17,6 +17,7 @@
 .auth-panel .auth-submit:active{box-shadow:inset 3px 3px 6px #1d4c3a,inset -3px -3px 6px #347c60;transform:none}
 @media(max-width:760px){.auth-panel{border-radius:22px;box-shadow:7px 7px 18px #cbd5cb,-7px -7px 18px #fffefa}}
 </style>
+<link rel="stylesheet" href="theme.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
 </head>
 <body>
@@ -28,7 +29,7 @@
 <form id="login-form"><label for="email">Email address</label><input class="auth-input" id="email" type="email" autocomplete="email" placeholder="you@example.com" required><button class="auth-submit" type="submit">Send sign-in link</button></form>
 <div id="signed-in" class="hidden"><p id="user-label" class="muted"></p><button id="signout" class="secondary" type="button">Sign out</button></div><p id="auth-status" class="status" role="status" aria-live="polite"></p>
 </section></section>
-<section class="panel" style="margin-top:32px"><h2>Social directory</h2><p class="muted">Choose a platform to review safety tips before opening its official website. Lock Room never asks for social media passwords.</p><div class="apps" id="apps"></div></section>
+<section class="panel" style="margin-top:32px"><h2>Social directory</h2><p class="muted">Choose a platform to review safety tips before opening its official website. Lock Room never asks for Secure Your Social Media passwords.</p><div class="apps" id="apps"></div></section>
 <section id="safety-panel" class="safety-card hidden" aria-live="polite">
 <div class="safety-brand"><span id="safety-mark" class="safety-mark">IG</span><span><span class="eyebrow">LOCK ROOM SAFETY GUIDE</span><br><span id="safety-title">Instagram safety guide</span></span></div>
 <p id="safety-intro" class="muted"></p>
