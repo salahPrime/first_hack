@@ -1,0 +1,108 @@
+body.icon-page {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    font-family: var(--font-banner);
+}
+
+.icon-page-content {
+    display: flex;
+    width: min(var(--layout-narrow), 100%);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.icon-page-title {
+    margin: 0 0 var(--space-1);
+    color: var(--color-text);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    text-align: center;
+}
+
+.social-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--size-banner);
+}
+
+.banner-bar {
+    position: absolute;
+    inset: 11% 0 11% var(--space-5);
+    display: flex;
+    align-items: center;
+    padding-left: var(--space-6);
+    background: var(--color-navy);
+    box-shadow: 0 var(--space-0) var(--space-1) var(--color-shadow);
+}
+
+.banner-text {
+    color: var(--color-gold-light);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-medium);
+    line-height: 1;
+}
+
+.banner-tab {
+    position: absolute;
+    inset: 14% 0 14% auto;
+    width: var(--space-2);
+    border-radius: var(--radius-control);
+    background: var(--color-gold);
+}
+
+.banner-icon-wrapper {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: var(--size-banner);
+    aspect-ratio: 1;
+    border: 2px solid var(--color-gold-light);
+    border-radius: 50%;
+    color: var(--color-navy-deep);
+    background: var(--color-gold);
+    box-shadow: 0 var(--space-0) var(--space-2) var(--color-shadow);
+    transition: transform .35s ease;
+}
+
+.banner-icon-wrapper svg {
+    width: var(--size-social-icon);
+    height: var(--size-social-icon);
+    fill: currentColor;
+}
+
+.social-banner:hover .banner-icon-wrapper {
+    transform: translateX(var(--space-5));
+}
+
+@media (max-width: 32.5rem) {
+    .icon-page-content {
+        gap: var(--space-2);
+    }
+
+    .social-banner {
+        height: var(--size-banner-mobile);
+    }
+
+    .banner-bar {
+        left: var(--space-4);
+        padding-left: var(--space-5);
+    }
+
+    .banner-text {
+        font-size: var(--text-xl);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .banner-icon-wrapper {
+        transition: none;
+    }
+}

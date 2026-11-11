@@ -1,0 +1,203 @@
+.page {
+    width: min(60rem, calc(100% - var(--page-gutter) * 2));
+    margin-inline: auto;
+    padding-block: var(--space-3) var(--space-6);
+}
+
+.page header {
+    width: 100%;
+    margin-bottom: var(--space-5);
+    font-weight: var(--weight-medium);
+}
+
+.brand {
+    text-decoration: none;
+}
+
+.home-link {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-control);
+    padding: var(--space-1) var(--space-2);
+    text-decoration: none;
+}
+
+h1 {
+    margin: 0 0 var(--space-0);
+    font: var(--weight-medium) var(--text-hero) / .95 var(--font-display);
+}
+
+.intro {
+    max-width: 39rem;
+    margin: 0 0 var(--space-3);
+    color: var(--color-muted);
+    font-size: var(--text-base);
+    line-height: var(--line-copy);
+}
+
+.access-checkpoint {
+    margin-block: var(--space-5);
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    background: var(--color-surface);
+}
+
+.access-checkpoint h2 {
+    margin: 0 0 var(--space-1);
+    font-size: var(--font-size-lg);
+}
+
+.access-checkpoint p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: var(--line-height-body);
+}
+
+.checkpoint-confirm {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.checkpoint-confirm input {
+    flex: 0 0 auto;
+    width: 1rem;
+    height: 1rem;
+    margin: var(--space-1) 0 0;
+    accent-color: var(--color-brand);
+}
+
+.access-checkpoint .checkpoint-status {
+    margin-top: var(--space-2);
+    font-size: var(--font-size-xs);
+}
+
+.social-banner[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.directory {
+    display: grid;
+    width: min(100%, 48rem);
+    gap: var(--space-3);
+}
+
+.social-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: var(--size-banner);
+    color: inherit;
+    text-decoration: none;
+    isolation: isolate;
+}
+
+.banner-bar {
+    position: absolute;
+    inset: 14% 0 14% calc(var(--size-banner) - var(--space-6));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: calc(var(--space-6) + var(--space-2)) var(--space-2);
+    background: var(--color-navy);
+}
+
+.banner-name {
+    color: var(--color-gold-light);
+    font: var(--weight-medium) var(--text-2xl)/1 var(--font-banner);
+    text-transform: uppercase;
+}
+
+.banner-action {
+    color: var(--color-muted);
+    font: var(--weight-medium) var(--text-xs)/1.2 var(--font-body);
+    white-space: nowrap;
+}
+
+.banner-tab {
+    position: absolute;
+    inset: 15% 0 15% auto;
+    width: var(--space-1);
+    border-radius: var(--radius-control);
+    background: var(--color-gold);
+}
+
+.banner-icon {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: var(--size-banner);
+    aspect-ratio: 1;
+    border: 2px solid var(--color-gold-light);
+    border-radius: 50%;
+    color: var(--color-text);
+    background: var(--color-gold);
+    box-shadow: 0 var(--space-0) var(--space-2) var(--color-shadow);
+    transition: transform .3s ease;
+}
+
+.banner-icon svg {
+    width: var(--size-social-icon);
+    height: var(--size-social-icon);
+    fill: currentColor;
+}
+
+.social-banner:hover .banner-icon,
+.social-banner:focus-visible .banner-icon {
+    transform: translateX(var(--space-2));
+}
+
+.social-banner:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: var(--space-0);
+}
+
+footer {
+    width: 100%;
+    margin-top: var(--space-4);
+}
+
+@media (max-width: 32.5rem) {
+    .page {
+        width: calc(100% - var(--space-3) * 2);
+    }
+
+    h1 {
+        font-size: var(--text-hero-small);
+    }
+
+    .social-banner {
+        min-height: var(--size-banner-mobile);
+    }
+
+    .banner-bar {
+        left: calc(var(--size-banner) - var(--space-6));
+        padding-left: calc(var(--space-6) + var(--space-2));
+    }
+
+    .banner-name {
+        font-size: var(--text-xl);
+    }
+
+    .banner-action {
+        font-size: var(--text-xs);
+    }
+}
+
+@media (max-width: 23.75rem) {
+    .banner-action {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .banner-icon {
+        transition: none;
+    }
+}

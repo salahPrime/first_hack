@@ -1,0 +1,369 @@
+/* Shared design tokens and reusable site components. */
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&display=swap');
+
+:root {
+  color-scheme: dark;
+  --color-page: #030609;
+  --color-surface: #0a1d2d;
+  --color-surface-muted: #10283a;
+  --color-text: #f4eddf;
+  --color-text-muted: #c3b9a5;
+  --color-text-subtle: #a99a7c;
+  --color-border: #705a36;
+  --color-border-soft: #4c3d26;
+  --color-brand: #c4a15b;
+  --color-brand-strong: #ead7ad;
+  --color-brand-contrast: #16130d;
+  --color-shadow: rgb(0 0 0 / 55%);
+  --color-dot: #23445a;
+  --color-gradient-blue: #0b304b;
+  --color-gradient-navy: #071b2c;
+  --color-gradient-gold: #806239;
+  --color-gradient-gold-light: #c2a15e;
+  --font-body: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-banner: 'Teko', 'Arial Narrow', sans-serif;
+  --font-social: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.75rem;
+  --font-size-hero: 3.75rem;
+  --font-size-hero-mobile: 2.5rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 600;
+  --font-weight-bold: 700;
+  --line-height-body: 1.7;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --content-width: 67.5rem;
+  --page-gutter: 2.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-pill: 999px;
+  --panel-padding: var(--space-6);
+  --shadow-card: 0 15px 45px var(--color-shadow);
+  --button-padding-block: 0.8125rem;
+  --button-padding-inline: 1.125rem;
+  --button-radius: var(--radius-sm);
+  --button-font-size: var(--font-size-sm);
+  --button-font-weight: 700;
+  --button-primary-bg: var(--color-brand);
+  --button-primary-hover-bg: var(--color-brand-strong);
+  --button-secondary-bg: var(--color-surface-muted);
+  --button-secondary-text: var(--color-brand-strong);
+  --header-grid: minmax(0, 1fr) auto;
+  --footer-grid: minmax(0, 1fr);
+  --content-grid: repeat(12, minmax(0, 1fr));
+  --content-gap: var(--space-4);
+  --color-navy: var(--color-surface);
+  --color-navy-deep: var(--color-page);
+  --color-navy-raised: var(--color-surface-muted);
+  --color-gold: var(--color-brand);
+  --color-gold-light: var(--color-brand-strong);
+  --color-muted: var(--color-text-muted);
+  --text-xs: var(--font-size-xs);
+  --text-sm: var(--font-size-sm);
+  --text-base: var(--font-size-base);
+  --text-lg: var(--font-size-lg);
+  --text-xl: var(--font-size-xl);
+  --text-2xl: var(--font-size-2xl);
+  --text-hero: var(--font-size-hero);
+  --text-hero-small: var(--font-size-hero-mobile);
+  --weight-normal: var(--font-weight-normal);
+  --weight-medium: var(--font-weight-medium);
+  --weight-bold: var(--font-weight-bold);
+  --line-copy: var(--line-height-body);
+  --space-0: var(--space-1);
+  --space-7: var(--space-8);
+  --layout-width: var(--content-width);
+  --layout-narrow: 30rem;
+  --layout-header-grid: var(--header-grid);
+  --layout-footer-grid: var(--footer-grid);
+  --radius-control: var(--radius-sm);
+  --radius-panel: var(--radius-md);
+  --button-background: var(--button-primary-bg);
+  --button-foreground: var(--color-brand-contrast);
+  --button-hover: var(--button-primary-hover-bg);
+  --size-brand-mark: 2.25rem;
+  --size-app-icon: 3.25rem;
+  --size-safety-mark: 2.875rem;
+  --size-banner: 5.75rem;
+  --size-banner-mobile: 5rem;
+  --size-social-icon: 2.625rem;
+  --size-step-number: 1.875rem;
+  --size-control-height: 3rem;
+  --size-input-height: 3.5rem;
+  --size-button-icon: 1.25rem;
+  --size-instagram-logo: 4rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-family: var(--font-body); color: var(--color-text); background: var(--color-page); }
+body {
+  min-width: 20rem;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  background-color: var(--color-page);
+  background-image: linear-gradient(135deg, var(--color-gradient-blue) 0%, var(--color-gradient-navy) 36%, var(--color-page) 36%, var(--color-page) 53%, var(--color-gradient-gold) 78%, var(--color-gradient-gold-light) 100%);
+  background-attachment: fixed;
+}
+img, svg { display: block; max-width: 100%; }
+button, a { font: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--color-brand); outline-offset: 3px; }
+.site-header, .site-main, .site-footer {
+  width: min(var(--content-width), calc(100% - var(--page-gutter) * 2));
+  margin-inline: auto;
+}
+.site-header { display: grid; grid-template-columns: var(--header-grid); align-items: center; padding-block: var(--space-6); }
+.brand { color: var(--color-text); font-size: var(--font-size-xl); font-weight: 800; text-decoration: none; }
+.brand-mark {
+  display: inline-grid; width: var(--size-brand-mark); height: var(--size-brand-mark); margin-right: var(--space-2);
+  place-items: center; border-radius: var(--radius-md); color: var(--color-brand-contrast);
+  background: var(--color-brand); vertical-align: middle;
+}
+.mark {
+  display: inline-grid;
+  width: var(--size-brand-mark);
+  height: var(--size-brand-mark);
+  margin-right: var(--space-2);
+  place-items: center;
+  border-radius: var(--radius-md);
+  color: var(--color-brand-contrast);
+  background: var(--color-brand);
+  font-weight: var(--font-weight-bold);
+}
+.site-footer {
+  display: grid; grid-template-columns: var(--footer-grid); padding-block: var(--space-5);
+  border-top: 1px solid var(--color-border); color: var(--color-text-subtle);
+  font-size: var(--font-size-xs); line-height: var(--line-height-body);
+}
+.button {
+  display: inline-block; padding: var(--button-padding-block) var(--button-padding-inline);
+  border: 1px solid transparent; border-radius: var(--button-radius); color: var(--color-brand-contrast);
+  background: var(--button-primary-bg); font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight); line-height: 1.4; text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+.button:hover { background: var(--button-primary-hover-bg); }
+.button-secondary { color: var(--button-secondary-text); background: var(--button-secondary-bg); }
+.button-secondary:hover { color: var(--button-secondary-text); background: var(--button-secondary-bg); }
+
+header:not(.site-header) {
+  display: grid;
+  width: min(var(--content-width), calc(100% - var(--page-gutter) * 2));
+  grid-template-columns: var(--header-grid);
+  align-items: center;
+  gap: var(--space-4);
+  margin-inline: auto;
+  padding-block: var(--space-6);
+}
+
+footer:not(.site-footer) {
+  display: grid;
+  width: min(var(--content-width), calc(100% - var(--page-gutter) * 2));
+  grid-template-columns: var(--footer-grid);
+  gap: var(--space-3);
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-body);
+}
+
+button,
+.sign-in-btn,
+.login-btn,
+.btn {
+  border: 1px solid var(--button-primary-bg);
+  border-radius: var(--button-radius);
+  padding: var(--button-padding-block) var(--button-padding-inline);
+  color: var(--button-foreground);
+  background: var(--button-primary-bg);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  cursor: pointer;
+}
+
+button:hover,
+.sign-in-btn:hover,
+.login-btn:hover,
+.btn:not(.btn-submit):hover {
+  background: var(--button-primary-hover-bg);
+}
+
+.secondary,
+.create-btn,
+.btn-create-account {
+  border: 1px solid var(--color-border);
+  color: var(--button-secondary-text);
+  background: var(--button-secondary-bg);
+}
+
+input:not([type='checkbox']),
+select,
+textarea,
+.input-field,
+.auth-input {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text);
+  background: var(--color-surface-muted);
+  font: var(--font-weight-normal) var(--font-size-base) var(--font-body);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+.panel,
+.card,
+.login-card,
+.trust-card,
+.steps,
+.mobile-container {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.panel {
+  padding: var(--panel-padding);
+}
+
+.panel h2 {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-normal);
+}
+
+.eyebrow,
+.home-eyebrow {
+  color: var(--color-brand-strong);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+}
+
+.muted,
+.subtitle {
+  color: var(--color-text-muted);
+}
+
+.status {
+  min-height: var(--space-4);
+  color: var(--color-brand-strong);
+  font-size: var(--font-size-xs);
+}
+
+.hidden { display: none !important; }
+
+/* Shared, transparent safety checkpoint used before opening official sites. */
+.checkpoint-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: var(--space-6) var(--page-gutter);
+}
+
+.checkpoint-card {
+  width: min(100%, var(--layout-narrow));
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.checkpoint-brand {
+  margin: 0 0 var(--space-2);
+  color: var(--color-brand-strong);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.checkpoint-card h1 {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  line-height: 1.2;
+}
+
+.checkpoint-card p {
+  color: var(--color-text-muted);
+  line-height: var(--line-height-body);
+}
+
+.checkpoint-reminders {
+  margin: var(--space-4) 0;
+  padding-left: var(--space-5);
+  color: var(--color-text-muted);
+}
+
+.checkpoint-reminders li + li { margin-top: var(--space-2); }
+
+.checkpoint-confirmation {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-block: var(--space-5);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+}
+
+.checkpoint-confirmation input {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  margin-top: var(--space-1);
+  accent-color: var(--color-brand);
+}
+
+.checkpoint-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.checkpoint-actions button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.checkpoint-back {
+  color: var(--color-brand-strong);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+}
+
+.checkpoint-status {
+  min-height: 1.25rem;
+  margin-top: var(--space-3);
+  font-size: var(--font-size-xs);
+}
+
+@media (max-width: 48rem) {
+  :root { --page-gutter: 1.125rem; }
+}

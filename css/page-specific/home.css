@@ -1,0 +1,28 @@
+/* Home page layout and components. Shared values come from ../global.css. */
+.home-hero {
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-12); align-items: center;
+  padding-block: var(--space-16) var(--space-12);
+}
+.home-eyebrow { color: var(--color-brand-strong); font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); letter-spacing: 0; text-transform: uppercase; }
+.home-hero h1 { max-width: 42.5rem; margin: var(--space-3) 0 var(--space-5); font-family: var(--font-display); font-size: var(--font-size-hero); font-weight: var(--font-weight-normal); line-height: 1.02; }
+.home-lead { max-width: 39.375rem; color: var(--color-text-muted); font-size: var(--font-size-lg); line-height: 1.75; }
+.home-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8); }
+.home-trust-card, .home-steps { padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-card); }
+.home-trust-card h2, .home-steps h2 { margin: 0 0 var(--space-2); font-family: var(--font-display); font-size: var(--font-size-2xl); font-weight: var(--font-weight-normal); line-height: 1.25; }
+.home-trust-card > p:not(.home-eyebrow), .home-steps p { margin: 0; color: var(--color-text-muted); line-height: var(--line-height-body); }
+.home-trust-list { margin: var(--space-5) 0 0; padding: 0; list-style: none; }
+.home-trust-list li { padding-block: var(--space-3); border-top: 1px solid var(--color-border-soft); color: var(--color-text-muted); line-height: 1.55; }
+.home-trust-list strong { color: var(--color-brand-strong); }
+.home-steps { margin-bottom: var(--space-16); }
+.home-step-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-5); }
+.home-step { padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.home-step-number { display: grid; width: var(--size-step-number); height: var(--size-step-number); margin-bottom: var(--space-3); place-items: center; border-radius: var(--radius-pill); color: var(--color-brand-contrast); background: var(--color-brand); font-weight: var(--font-weight-bold); }
+.home-step h3 { margin: 0 0 var(--space-2); font-size: var(--font-size-base); }
+.home-step p { font-size: var(--font-size-sm); }
+@media (max-width: 47.5rem) {
+  .home-hero { grid-template-columns: minmax(0, 1fr); gap: var(--space-8); padding-top: var(--space-8); }
+  .home-hero h1 { font-size: var(--font-size-hero-mobile); }
+  .home-step-grid { grid-template-columns: minmax(0, 1fr); }
+  .site-main { padding-bottom: var(--space-5); }
+}
