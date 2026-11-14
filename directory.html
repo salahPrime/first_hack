@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#030609"><meta name="description" content="Lock Room community app directory">
+<title>Lock Room</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/page-specific/directory.css">
+</head>
+<body>
+<header><div class="brand"><span class="mark">L</span>Lock Room</div><a class="pill" href="index.html">Home</a></header>
+<main>
+<section class="hero">
+<div><p class="eyebrow">A little more connected</p><h1>Good things happen together.</h1><p class="muted">A simple directory for the social spaces you use. Open an app's official website from one place.</p></div>
+<section class="panel auth-panel" aria-labelledby="auth-title"><h2 id="auth-title">Admin sign in</h2><p class="muted">Only the authorised administrator can manage directory icons. Sign in using a secure email link.</p>
+<form id="login-form"><label for="email">Email address</label><input class="auth-input" id="email" type="email" autocomplete="email" placeholder="you@example.com" required><button class="auth-submit" type="submit">Send sign-in link</button></form>
+<div id="signed-in" class="hidden"><p id="user-label" class="muted"></p><button id="signout" class="secondary" type="button">Sign out</button></div><p id="auth-status" class="status" role="status" aria-live="polite"></p>
+</section></section>
+<section class="panel directory-panel"><h2>Social directory</h2><p class="muted">Choose a platform to review safety tips before opening its official website. Lock Room never asks for Secure Your Social Media passwords.</p><div class="apps" id="apps"></div></section>
+<section id="safety-panel" class="safety-card hidden" aria-live="polite">
+<div class="safety-brand"><span id="safety-mark" class="safety-mark">IG</span><span><span class="eyebrow">LOCK ROOM SAFETY GUIDE</span><br><span id="safety-title">Instagram safety guide</span></span></div>
+<p id="safety-intro" class="muted"></p>
+<ul class="safety-list"><li>Use a strong, unique password on the official platform.</li><li>Enable two-factor authentication in the platform's own security settings.</li><li>Never share login codes or passwords, and avoid suspicious links.</li><li>Review active sessions and sign out of devices you do not recognise.</li></ul>
+<label><input id="safety-confirm" class="safety-confirm" type="checkbox"> I have read these safety tips.</label>
+<div id="safety-success" class="hidden"><h2 class="safety-success-title">Congratulations!</h2><p class="muted">You have completed the Lock Room safety guidance. Follow these steps on the official platform to help keep your account safe.</p></div>
+<div class="safety-actions"><button id="safety-complete" type="button">Complete safety guide</button><a id="official-link" class="button hidden" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Continue to official website -&gt;</a><button id="safety-back" class="secondary" type="button">Back to directory</button></div>
+<p class="safety-note">Lock Room is independent and is not affiliated with these platforms. This is safety guidance, not an account scan or security verification.</p>
+</section>
+<section id="admin-panel" class="panel admin hidden"><h2>Admin dashboard</h2><p class="muted">Upload a replacement icon. Images are stored in Supabase Storage and shared with visitors.</p><div class="admin-row" id="upload-controls"></div><p id="admin-status" class="status" role="status"></p></section>
+</main><footer>Lock Room | Secure admin access | No social account passwords collected</footer>
+<script>
+(() => {
+ const SUPABASE_URL="https://scezwjlsagkzmbdaroof.supabase.co";
+ const SUPABASE_PUBLISHABLE_KEY="sb_publishable_1WdJH63Uqn_8xcv6SG7rNg_EfwPELjv";
+ const ADMIN_EMAIL="salahudheen2006@gmail.com";
+ const BUCKET="app-icons";
+ const apps=[
+  {id:"instagram",name:"Instagram",url:"https://www.instagram.com/",color:"#c13584",mark:"IG"},
+  {id:"facebook",name:"Facebook",url:"https://www.facebook.com/",color:"#4267b2",mark:"f"},
+  {id:"x",name:"X",url:"https://x.com/",color:"#202c29",mark:"X"},
+  {id:"whatsapp",name:"WhatsApp",url:"https://www.whatsapp.com/",color:"#25a56a",mark:"WA"}
+ ];
+ const $=s=>document.querySelector(s), status=$("#auth-status");
+ if(!window.supabase){status.textContent="Authentication library failed to load. Refresh the page.";return}
+ const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+ function renderApps(urls={}){$("#apps").innerHTML=apps.map(a=>'<article class="app"><img src="'+(urls[a.id]||"data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect width="64" height="64" rx="14" fill="'+a.color+'"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="23" font-family="Arial">'+a.mark+'</text></svg>'))+'" alt="'+a.name+' icon"><strong>'+a.name+'</strong><a class="review-link" href="'+({instagram:"insta_login.html",facebook:"facebook_login.html",x:"x_login.html",whatsapp:"whatsapp_login.html"}[a.id])+'">Review safety tips -&gt;</a></article>').join("")}
+ async function loadIcons(){const {data,error}=await client.storage.from(BUCKET).list();if(error){renderApps();return}const entries=(data||[]).map(file=>{const id=file.name.replace(/\.(png|jpg|webp)$/i,"");const {data:pub}=client.storage.from(BUCKET).getPublicUrl(file.name);return [id,pub.publicUrl]});renderApps(Object.fromEntries(entries))}
+
+ let selectedApp=null;
+
+ $("#safety-complete").addEventListener("click",()=>{if(!$("#safety-confirm").checked){$("#safety-intro").textContent="Please confirm that you have read the safety tips.";return}$("#safety-success").classList.remove("hidden");$("#official-link").classList.remove("hidden");$("#safety-complete").classList.add("hidden")});
+ $("#safety-back").addEventListener("click",()=>{$("#safety-panel").classList.add("hidden");$("#apps").scrollIntoView({behavior:"smooth",block:"start"})});
+ function setAdmin(user){const isAdmin=!!user&&user.email?.toLowerCase()===ADMIN_EMAIL;$("#login-form").classList.toggle("hidden",!!user);$("#signed-in").classList.toggle("hidden",!user);$("#admin-panel").classList.toggle("hidden",!isAdmin);$("#user-label").textContent=user?"Signed in as "+user.email:"";if(user&&!isAdmin)status.textContent="Signed in, but this account is not authorised for admin access."}
+ $("#login-form").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const button=e.currentTarget.querySelector("button[type=submit]"), email=$("#email").value.trim().toLowerCase();
+  if(button.disabled)return;
+  if(email!==ADMIN_EMAIL){status.textContent="Only the configured administrator can request a sign-in link.";return}
+  button.disabled=true;
+  button.textContent="Sending...";
+  status.textContent="Sending secure sign-in link...";
+  try{
+   const {error}=await client.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+"/directory.html",shouldCreateUser:true}});
+   if(error){
+    const limited=/rate.?limit|too many|429/i.test((error.code||"")+" "+error.message);
+    status.textContent=limited?"Supabase has temporarily limited sign-in emails. Wait before trying again; configure custom SMTP in Supabase for reliable delivery.":error.message;
+   }else status.textContent="Check your email for the secure sign-in link. Wait 60 seconds before requesting another.";
+  }catch(error){status.textContent=error.message||"Could not send the sign-in link. Please try again later."}
+  button.textContent="Wait before retrying";
+  window.setTimeout(()=>{button.disabled=false;button.textContent="Send sign-in link"},60000);
+ });
+ $("#signout").addEventListener("click",async()=>{const {error}=await client.auth.signOut();status.textContent=error?error.message:"Signed out.";});
+ $("#upload-controls").innerHTML=apps.map(a=>'<label>'+a.name+' <input type="file" accept="image/png,image/jpeg,image/webp" data-upload="'+a.id+'"></label>').join("");
+ $("#upload-controls").addEventListener("change",async e=>{const input=e.target.closest("[data-upload]");if(!input||!input.files[0])return;const file=input.files[0],id=input.dataset.upload;if(!["image/png","image/jpeg","image/webp"].includes(file.type)||file.size>1024*1024){$("#admin-status").textContent="Choose a PNG, JPEG or WebP image smaller than 1 MB.";input.value="";return}$("#admin-status").textContent="Uploading...";const ext=file.type==="image/png"?"png":file.type==="image/webp"?"webp":"jpg";const {error}=await client.storage.from(BUCKET).upload(id+"."+ext,file,{upsert:true,contentType:file.type,cacheControl:"3600"});$("#admin-status").textContent=error?error.message:"Upload complete. Refreshing directory...";if(!error){const {data}=await client.storage.from(BUCKET).list();const match=data?.find(x=>x.name.replace(/\.(png|jpg|webp)$/i,"")===id);if(match){const {data:pub}=client.storage.from(BUCKET).getPublicUrl(match.name);const img=$("#apps").querySelector('[data-safety="'+id+'"] img');if(img)img.src=pub.publicUrl+"?v="+Date.now()}}input.value=""});
+ client.auth.onAuthStateChange((_event,session)=>setAdmin(session?.user||null));
+ client.auth.getSession().then(({data,error})=>{if(error)status.textContent=error.message;setAdmin(data.session?.user||null)});
+ loadIcons();
+})();
+</script>
+</body></html>

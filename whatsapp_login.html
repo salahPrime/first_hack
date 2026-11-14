@@ -1,0 +1,34 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A Lock Room safety reminder before opening the official WhatsApp website.">
+  <title>WhatsApp safety checkpoint | Lock Room</title>
+  <link rel="stylesheet" href="css/global.css">
+  <script src="js/platform-checkpoint.js" defer></script>
+</head>
+<body>
+  <main class="checkpoint-page" data-platform="whatsapp">
+    <section class="checkpoint-card" aria-labelledby="checkpoint-title">
+      <p class="checkpoint-brand">Lock Room · Safety checkpoint</p>
+      <h1 id="checkpoint-title">Before you open WhatsApp</h1>
+      <p>You’re about to leave Lock Room and visit the official WhatsApp website at <strong>whatsapp.com</strong>.</p>
+      <ul class="checkpoint-reminders">
+        <li>Check the address bar to confirm you’re on whatsapp.com.</li>
+        <li>Enter your password and sign-in codes only on the official website.</li>
+      </ul>
+      <p>Lock Room does not sign in to social accounts or collect their passwords.</p>
+      <label class="checkpoint-confirmation">
+        <input id="checkpoint-confirmation" type="checkbox">
+        <span>I’ve read the reminder and am ready to continue.</span>
+      </label>
+      <div class="checkpoint-actions">
+        <button id="checkpoint-continue" class="button" type="button" disabled>Continue to official website</button>
+        <a class="checkpoint-back" href="social-directory.html">Back to Social Directory</a>
+      </div>
+      <p id="checkpoint-status" class="checkpoint-status" role="status" aria-live="polite">Confirm the reminder to continue.</p>
+    </section>
+  </main>
+</body>
+</html>
